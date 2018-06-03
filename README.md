@@ -8,9 +8,23 @@ Model Predictive Control considers the task of following a trajectory as an opti
 I used a global kinematic model, which is a simplification of a dynamic model that ignores tire forces, gravity and mass.
 The state model is represented by the vehicles position, orientation angle (in radians) and velocity.
 
-![Image of The Model](images/themodel.png)
+Position (_x,y_), heading (_ψ_) and velocity (_v_) form the vehicle state vector:
 
-A cross track error (distance of vehicle from trajectory) and an orientation error (difference of vehicle orientation and trajectory orientation) were also included in the state model. Two actuators were used, delta — to represent the steering angle (normalised to [-1,1]) and a — for acceleration corresponding to a throttle, with negative values for braking.
+State: _[x,y,ψ,v]_
+
+![Image of The Model](images/themodel.png)
+There are two actuators. Stearing angle (_δ_) is the first one, it should be in range [-25,25] deg. For simplicity the throttle and brake represented as a singular actuator (_a_), with negative values signifying braking and positive values signifying acceleration. It should be in range [-1,1].
+
+Actuators: _[δ,a]_
+
+The kinematic model can predict the state on the next time step by taking into account the current state and actuators as follows:
+
+![Kinematic model](images/eq1.png)
+
+where _Lf_ measures the distance between the front of the vehicle and its center of gravity. 
+Errors: cross track error(distance of vehicle from trajectory) (_cte_) and orientation error (difference of vehicle orientation and trajectory orientation) _ψ_ error (_eψ_) were used to build the cost function for the MPC. They could be updated on a new time step using the following equations:
+
+![Errors update model](images/eq2.png)
 
 The simulator passes via a socket, ptsx & ptsy of six waypoints (5 in front, 1 near the vehicle), the vehicle x,y map position, orientation and speed (mph).This data after being transformed into the vehicle map space, with new cross track error and orientation error calculated, is then passed into the MPC (Model Predictive Control) solve routine. It returns, the two new actuator values, with steering and acceleration (i.e. throttle) and the MPC predicted path (plotted in green in the simulator).
 
