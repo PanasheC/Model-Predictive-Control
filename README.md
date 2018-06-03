@@ -8,7 +8,7 @@ Model Predictive Control considers the task of following a trajectory as an opti
 I used a global kinematic model, which is a simplification of a dynamic model that ignores tire forces, gravity and mass.
 The state model is represented by the vehicles position, orientation angle (in radians) and velocity.
 
-Position (_x,y_), heading (_ψ_) and velocity (_v_) form the vehicle state vector:$$\psi$$
+Position (_x,y_), heading (_ψ_) and velocity (_v_) form the vehicle state vector: $\int_a^b x^2 dx$
 
 State: _[x,y,ψ,v]_
 
