@@ -92,7 +92,7 @@ This is close to the ground truth of the actuation delay that would be experienc
 
 I experimented with varying the ratio of dt (time interval) to latency in seconds, being near 1 (i.e. the time interval was close to the latency value), had an impact on the ability of the MPC algorithm to handle latency. Iin reality ratio values of < 1 (for this project, I had (.65/8)/.100 = .0.8125) were to ensure the optimizer was able to find a solution. 
   
-The vehicle position was projected forward, the distance it would travel, to cover 100ms of latency.Before I implemented the forward projection for latency, you could see in places where the vehicle lagged a little in its turning. The MPC, however predicted the path correctly back onto the centre line of the track as er the video below:
+The vehicle position was projected forward, the distance it would travel, to cover 100ms of latency.Before I implemented the forward projection for latency, you could see in places where the vehicle lagged a little in its turning. The MPC, however predicted the path correctly back onto the centre line of the track as per the video below:
 
 ![Image of Model Predictive Control](images/modelpredictivecontrol.gif)
 
